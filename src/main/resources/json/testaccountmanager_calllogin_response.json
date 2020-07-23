@@ -1,0 +1,12 @@
+{
+  "responseCode": 30000,
+  "responseMap": {
+    "accountId" : "0123456789123456",
+    "token" : "0123456789ABCDEFGHILMNOPQRSTUVWZ",
+    "fiscalCode" : "ABCDE12345FGHILM",
+    "lastLoginDate" : "2020-09-01T00:00:00Z",
+    "pwdExpirationDays" : 2,
+    "contractSettings" : 3
+    },
+  "responseMsg": "OK"
+}

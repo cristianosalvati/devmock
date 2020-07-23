@@ -1,0 +1,9 @@
+{
+  "responseCode": 30000,
+  "responseMap": {
+    "currencyIso" : "abc",
+    "fiscalCode" : "0123456789123456",
+    "regionCode" : "a"
+    },
+  "responseMsg": "OK"
+}
