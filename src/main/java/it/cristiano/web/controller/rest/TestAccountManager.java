@@ -10,7 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import it.cristiano.web.model.SimpleModelResponse;
+import it.cristiano.web.model.UserAccount;
 import it.cristiano.web.model.InputI;
 import it.cristiano.web.model.OutputI;
 import it.cristiano.web.util.Constants;
@@ -27,22 +30,23 @@ public class TestAccountManager extends MockAbstract{
 	public  ResponseEntity<String> callLogin(HttpServletRequest request) {
 
 		try {
-			String requestParams = request.getReader().lines().collect(java.util.stream.Collectors.joining());
-			logger.info("requestParams = {}", requestParams);
+			String jsonRequestBody = request.getReader().lines().collect(java.util.stream.Collectors.joining());
+			UserAccount userAccount = new ObjectMapper().readValue(jsonRequestBody, UserAccount.class);
+			logger.info("userAccount = {}", userAccount);
 		} catch (IOException e) {
 			logger.error(e.getMessage());
 //			e.printStackTrace();
 		}
-		
+	
 		String jsonResponseFileName = Constants.getJsonFolder()+getMockJsonFileName();
         logger.debug("jsonResponseFileName = {}", jsonResponseFileName);
         
-        String jsonString = ParseUtil.jsonFromFile2String(jsonResponseFileName);
-        logger.debug("jsonString = {}", jsonString);
+        String jsonResponseBody = ParseUtil.jsonFromFile2String(jsonResponseFileName);
+        logger.debug("jsonString = {}", jsonResponseBody);
         
         ResponseEntity resp= ResponseEntity.ok()
                 .headers(httpHeaders)
-                .body(jsonString);
+                .body(jsonResponseBody);
         
         logger.debug("ResponseEntity = {}", resp);
         return resp;
